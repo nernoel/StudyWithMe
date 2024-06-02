@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id           String    @id @default(uuid()) 
+  email        String    @unique                              
+  posts        Post[]
+}
+
+model Post {
+  id             String @id @default(uuid())
+  title          String 
+  description    String
+
+  // Link relation to user email
+  userEmail      String @unique // reference to user email as shown below:
+  user           User   @relation(fields: [userEmail], references: [email])
+}
+
