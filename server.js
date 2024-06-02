@@ -31,7 +31,7 @@ app.post('/signup', async (req, res) => {
 
 // CREATE - new user post
 app.post('/post', async (req, res) => {
-    const { title, description, userEmail } = req.body;
+    const { title, description, userEmail, isActive, isPrivate, location, createdAt } = req.body;
     try {
         const data = await prisma.post.create({
             data: {
@@ -39,7 +39,11 @@ app.post('/post', async (req, res) => {
                 description: description,
                 user: {
                     connect: { email: userEmail }
-                }
+                },
+                isActive: isActive,
+                isPrivate: isPrivate,
+                location: location,
+                createdAt: createdAt
             }
         });
         res.json(data);
