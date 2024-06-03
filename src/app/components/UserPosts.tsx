@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 import { auth } from "@/app/utils/auth";
-import StudySessionCard from "../components/StudySessionCard";
+import StudySessionCard from "./StudySessionCard";
 
 
-export default async function MyPosts(){
+export default async function UserPosts(){
     const prisma = new PrismaClient();
     const session = await auth();
     

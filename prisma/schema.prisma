@@ -18,8 +18,8 @@ model Post {
   title       String
   description String
   location    String
-  isActive    Boolean @default(false)
-  isPrivate   Boolean @default(false)
+  isActive    String @default("True")
+  isPrivate   String @default("False")
 
   createdAt DateTime @default(now())
 
