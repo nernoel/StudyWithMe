@@ -51,6 +51,43 @@ export default async function Post({ title, description, location, status }: Pos
         }
     };
 
+    // fetch user email
+    // function to fetch user image
+    const FetchPostOwnerEmail = async () => {
+        "use server";
+
+        try {
+            const session = await auth();
+
+            if (!session || !session.user || !session.user.email) {
+                throw new Error("No user session found");
+            }
+
+            const data = await client.user.findUnique({
+                where: {
+                    email: session.user.email
+                },
+                select: {
+                    email: true,
+
+                },
+            });
+
+            if (!data) {
+                throw new Error("User not found");
+            }
+            return data.email;
+
+        } catch (error) {
+            console.error("Error fetching user image:", error);
+            return null;
+
+        } finally {
+
+            await client.$disconnect();
+        }
+    };
+
 
     // function to fetch user image
     const FetchUserImage = async () => {
@@ -92,25 +129,25 @@ export default async function Post({ title, description, location, status }: Pos
     // defining user properties
     const userName = await FetchUserName();
     const imageUrl = await FetchUserImage();
+    const email = await FetchPostOwnerEmail();
 
 
-    return (
-        
-        <div className="w-56 h-56 flex flex-col m-1 p-2 rounded shadow-sm relative hover: ">
-          <div className="mb-2">
-            {imageUrl ? <img className="w-12 h-12 rounded" src={imageUrl} alt="Post Image" /> : <p>No image found</p>}
-          </div>
-          <div className="mb-1">
-            <span>Posted by {userName}</span>
-          </div>
-          <div className="font-bold text-xl">
-            {title}
-          </div>
-          <div className="w-full h-full overflow-y-auto transition-all duration-300 ease-in-out bg-white shadow-lg z-10 rounded-b-md">
-            <p className="text-sm">{description}</p>
-          </div>
+    return (    
+        <div>
+            <div className='border-solid border-2 border-sky-200 align-items-center flex flex-col shadow-2xl'>
+                
+                <span>{imageUrl ? <img className="mt-1 ml-3 h-12 w-12 rounded-full"src={imageUrl} /> : <p>Image not found</p>}</span>
+                <span className='ml-3 text-gray-200 text-2xl font-bold mb-1'>{title}</span>
+                <span className='ml-3 text-gray-200'>{description}</span>
+                {/*<div className='mt-4 mb-3'><span className='bg-indigo-50 text-indigo-500 px-2 py-2'>{status}</span></div> */}
+                <div className='ml-3 mt-3 mb-3' ><span className='bg-blue-50 text-blue-500 px-2 py-2 rounded-full'>{location}</span></div>
+                <div className='mt-3 mb-3'>
+                <a href={`mailto:${email}`}>
+                <span className='ml-3 bg-green-50 text-green-500 px-2 py-2 rounded-full'>Message</span>
+                </a>
+                </div>
+             
+            </div>
         </div>
-      );
-      
+    )
 }
-

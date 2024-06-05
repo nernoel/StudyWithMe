@@ -15,8 +15,13 @@ export default async function UserPosts() {
 
     return (
         <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">MY STUDY POSTS</h1>
+            <h1 className="text-gray-200 text-2xl font-bold mb-4">MY STUDY POSTS</h1>
+            <div className="">
             <CreatePostForm />
+            <button className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                Delete a post
+                </button>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {userPosts.map(post => (
                     <Post 
