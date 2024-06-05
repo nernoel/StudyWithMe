@@ -2,19 +2,19 @@ import { PrismaClient } from '@prisma/client';
 import { auth } from '@/app/api/auth/[...nextauth]/auth';
 
 interface Post {
-title: string;
-description: string;
-location: string;
-status: string;
-// createdAt: Date;
+    title: string;
+    description: string;
+    location: string;
+    status: string;
+    // createdAt: Date;
 }
 
 // instantiate prisma client
 const prisma = new PrismaClient();
 
 // Post component function
-export default async function Post({title, description, location, status}: Post) {
-    
+export default async function Post({ title, description, location, status }: Post) {
+
     // function to fetch user name
     const FetchUserName = async () => {
         "use server";
@@ -39,7 +39,7 @@ export default async function Post({title, description, location, status}: Post)
             if (!data) {
                 throw new Error("User not found");
             }
-            
+
             return data.name;
 
         } catch (error) {
@@ -77,7 +77,7 @@ export default async function Post({title, description, location, status}: Post)
             if (!data) {
                 throw new Error("User not found");
             }
-            
+
             return data.image;
 
         } catch (error) {
@@ -91,7 +91,7 @@ export default async function Post({title, description, location, status}: Post)
     };
 
 
-    
+
     // defining user properties
     const userName = await FetchUserName();
     const imageUrl = await FetchUserImage();
@@ -111,15 +111,15 @@ export default async function Post({title, description, location, status}: Post)
                     Posted by:
                     {userName ? <span>{userName}</span> : <span>No name found</span>}
                 </p>
-    
+
                 {/* post title */}
                 <h3 className="text-xl font-medium text-gray-900">{title}</h3>
-    
+
                 {/* post description */}
                 <p className="scroll-auto mt-1 text-gray-500 flex-grow overflow-hidden">
                     {description}
                 </p>
-    
+
                 <div className="mt-4 flex gap-2">
                     <span className="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-600">
                         Status: {status}
@@ -134,7 +134,7 @@ export default async function Post({title, description, location, status}: Post)
             </div>
         </div>
     );
-    
+
 }
 
 
