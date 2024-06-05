@@ -1,7 +1,7 @@
 "use server"
 
 import { PrismaClient } from '@prisma/client';
-import {auth} from '@/app/api/auth/[...nextauth]/auth'
+import { auth } from '@/app/api/auth/[...nextauth]/auth'
 
 interface Post {
     title: string;
@@ -9,12 +9,12 @@ interface Post {
     location: string;
     status: string;
     // createdAt: Date;
-    }
+}
 
-export const postData = async ({ title, description, location, status}: Post) => {
+export const postData = async ({ title, description, location, status }: Post) => {
     const prisma = new PrismaClient();
     const session = await auth();
-    
+
     try {
         const postData = await prisma.post.create({
             data: {
@@ -23,8 +23,8 @@ export const postData = async ({ title, description, location, status}: Post) =>
                 location: location,
                 status: status,
                 userEmail: session?.user?.email!
-                
-               
+
+
             }
         });
         return postData;

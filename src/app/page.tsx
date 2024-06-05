@@ -1,4 +1,3 @@
-
 import UserPosts from "./components/UserPosts";
 
 export default function Home(){
