@@ -29,7 +29,7 @@ model Post {
   title       String
   description String
   location    String
-  status      String @default("Active")
+  status      String 
 
   createdAt DateTime @default(now())
 

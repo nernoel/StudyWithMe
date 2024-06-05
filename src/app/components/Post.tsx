@@ -2,18 +2,18 @@ import { PrismaClient } from '@prisma/client';
 import { auth } from '@/app/api/auth/[...nextauth]/auth';
 
 interface Post {
-title: string;
-description: string;
-location: string;
-status: string;
-// createdAt: Date;
+    title: string;
+    description: string;
+    location: string;
+    status: string;
+    // createdAt: Date;
 }
 
 // instantiate prisma client
-const prisma = new PrismaClient();
+const client = new PrismaClient();
 
 // Post component function
-export default async function Post({title, description, location, status}: Post) {
+export default async function Post({ title, description, location, status }: Post) {
 
     // function to fetch user name
     const FetchUserName = async () => {
@@ -26,7 +26,7 @@ export default async function Post({title, description, location, status}: Post)
                 throw new Error("No user session found");
             }
 
-            const data = await prisma.user.findUnique({
+            const data = await client.user.findUnique({
                 where: {
                     email: session.user.email
                 },
@@ -47,7 +47,7 @@ export default async function Post({title, description, location, status}: Post)
 
         } finally {
 
-            await prisma.$disconnect();
+            await client.$disconnect();
         }
     };
 
@@ -63,7 +63,7 @@ export default async function Post({title, description, location, status}: Post)
                 throw new Error("No user session found");
             }
 
-            const data = await prisma.user.findUnique({
+            const data = await client.user.findUnique({
                 where: {
                     email: session.user.email
                 },
@@ -84,7 +84,7 @@ export default async function Post({title, description, location, status}: Post)
 
         } finally {
 
-            await prisma.$disconnect();
+            await client.$disconnect();
         }
     };
 
@@ -95,41 +95,22 @@ export default async function Post({title, description, location, status}: Post)
 
 
     return (
-        <div className="border-2 border-sky-500 h-72 w-72">
-            {/* user post image */}
-            {imageUrl ? (
-                <img className="w-9 h-9 rounded-full" src={imageUrl} alt="User Image" />
-            ) : (
-                <p>No image found</p>
-            )}
-            <div className="p-4 flex flex-col flex-grow">
-                {/* user posted by username */}
-                <p className="mb-1 text-sm text-primary-500 text-gray-900">
-                    Posted by:
-                    {userName ? <span>{userName}</span> : <span>No name found</span>}
-                </p>
-
-                {/* post title */}
-                <h3 className="text-xl font-medium text-gray-900">{title}</h3>
-
-    {/* post description */ }
-                <p className="scroll-auto mt-1 text-gray-500 flex-grow overflow-hidden">
-                    {description}
-                </p>
-    
-                <div className="mt-4 flex gap-2">
-                    <span className="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-600">
-                        Status: {status}
-                    </span>
-                    <span className="inline-flex items-center gap-1 rounded-full bg-purple-50 px-2 py-1 text-xs font-semibold text-purple-600">
-                        Location: {location}
-                    </span>
-                    <span className="inline-flex items-center gap-1 rounded-full bg-green-600 px-2 py-1 text-xs font-semibold text-gray-100">
-                        Request to join
-                    </span>
-                </div>
-            </div >
-        </div >
-    );
+        
+        <div className="w-56 h-56 flex flex-col m-1 p-2 rounded shadow-sm relative hover: ">
+          <div className="mb-2">
+            {imageUrl ? <img className="w-12 h-12 rounded" src={imageUrl} alt="Post Image" /> : <p>No image found</p>}
+          </div>
+          <div className="mb-1">
+            <span>Posted by {userName}</span>
+          </div>
+          <div className="font-bold text-xl">
+            {title}
+          </div>
+          <div className="w-full h-full overflow-y-auto transition-all duration-300 ease-in-out bg-white shadow-lg z-10 rounded-b-md">
+            <p className="text-sm">{description}</p>
+          </div>
+        </div>
+      );
+      
 }
 
