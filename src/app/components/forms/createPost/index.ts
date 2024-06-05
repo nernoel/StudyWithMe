@@ -12,7 +12,7 @@ interface Props {
 
 export const postData = async ({ title, description, location, isActive, isPrivate }: Props) => {
     const prisma = new PrismaClient();
-    
+
     try {
         const postData = await prisma.post.create({
             data: {
