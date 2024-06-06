@@ -1,7 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 import { auth } from '@/app/api/auth/[...nextauth]/auth';
+import { UUID } from 'crypto';
 
 interface UserPost {
+    id: UUID;
     title: string;
     description: string;
     location: string;
@@ -17,7 +19,8 @@ const client = new PrismaClient();
 
 
 // Post component function
-export default async function MyPost({ start_time, end_time, date, title, description, location, status }: UserPost) {
+export default async function MyPost({ id, start_time, end_time, date, title, description, location, status }: UserPost) {
+
 
     // function to fetch user name
     const FetchUserName = async () => {
@@ -141,7 +144,7 @@ export default async function MyPost({ start_time, end_time, date, title, descri
 
 
     return (
-        <div>
+        <div className='bg-slate-900 rounded-lg'>
             <div className='rounded-lg border-solid border-2 border-sky-200 align-items-center flex flex-col shadow-2xl'>
                 <div className="relative">
                     {sessionIsActive ? (
@@ -154,20 +157,23 @@ export default async function MyPost({ start_time, end_time, date, title, descri
                     ) : (
                         <p>Image not found</p>
                     )}
-                    <span className='ml-3 text-gray-200'>Posted by {userName} </span>
+                    <span className='ml-3 text-gray-900 text-xl'>Posted by {userName} </span>
                 </div>
 
-                <span className='ml-3 text-gray-200 text-2xl font-bold mb-1'>{title}</span>
-                <span className='ml-3 text-gray-200'>{description}</span>
-                <div className='ml-3 mt-3 mb-3'><span className='bg-blue-50 text-blue-500 px-2 py-2 rounded-full'>Start time: {start_time}</span></div>
-                <div className='ml-3 mt-3 mb-3'><span className='bg-blue-50 text-blue-500 px-2 py-2 rounded-full'>End time: {end_time}</span></div>
-                <div className='ml-3 mt-3 mb-3'><span className='bg-blue-50 text-blue-500 px-2 py-2 rounded-full'>Date: {date}</span></div>
+                <span className='ml-3 text-gray-50 text-2xl font-bold mb-1 font-extrabold'>{title}</span>
+                <span className='ml-3 text-gray-50'>{description}</span>
+                <div className='flex ml-3 mt-3 mb-3'>
+                    <span className='mr-2 bg-indigo-50 text-indigo-500 px-2 py-2 rounded-full font-extrabold'>{date}</span>
+                    <span className='bg-blue-50 text-blue-500 px-2 py-2 rounded-full font-extrabold'>{start_time} - {end_time}</span>
+                </div>
+
+               
                 
-                <div className='ml-3 mt-3 mb-3'><span className='bg-blue-50 text-blue-500 px-2 py-2 rounded-full'>Location {location}</span></div>
-                <div className='mt-3 mb-3'>
-                    <a href={`mailto:${email}`}>
-                        <span className='ml-3 bg-green-50 text-green-500 px-2 py-2 rounded-full'>Message</span>
-                    </a>
+                <div className='ml-3 mt-3 mb-3'><span className='bg-cyan-50 text-cyan-500 px-2 py-2 rounded-full font-extrabold'>Location: {location}</span></div>
+
+                <div className='flex'>
+                <div className='ml-3 mt-3 mb-3'><span className='bg-yellow-500 text-yellow-50 px-2 py-2 rounded-full font-extrabold'>Edit</span></div>
+                <div className='ml-3 mt-3 mb-3'></div>
                 </div>
             </div>
         </div>
