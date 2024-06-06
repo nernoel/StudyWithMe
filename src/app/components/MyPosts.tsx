@@ -1,13 +1,14 @@
 import { PrismaClient } from "@prisma/client";
 import { auth } from "@/app/api/auth/[...nextauth]/auth";
-import Post from "@/app/components/Post";
+import MyPost from "./MyPost";
 import CreatePostForm from "@/app/components/CreatePost/CreatePost";
 
-export default async function UserPosts() {
+export default async function MyPosts() {
+
     const prisma = new PrismaClient();
     const session = await auth();
 
-    const userPosts = await prisma.post.findMany({
+    const myPosts = await prisma.post.findMany({
         where: {
             userEmail: session?.user?.email!
         }
@@ -19,20 +20,20 @@ export default async function UserPosts() {
             <hr></hr>
             <h1 className="text-gray-200 text-2xl font-bold mb-4 mt-3">MY STUDY POSTS</h1>
             <div className="flex">
-            <CreatePostForm />
-            <button className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                Delete a post
-                </button>
+                <CreatePostForm />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {userPosts.map(post => (
-                    <Post 
-                        key={post.id} 
+            <div className="flex-grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {myPosts.map(post => (
+                    <MyPost
+                        key={post.id}
                         title={post.title}
                         description={post.description}
                         location={post.location}
-                        status={post.status}
-                    />
+                        status={post.status} 
+                        start_time={post.start_time} 
+                        end_time={post.end_time} 
+                        date={post.date}                                            
+                        />
                 ))}
             </div>
         </div>

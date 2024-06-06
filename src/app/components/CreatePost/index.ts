@@ -3,15 +3,19 @@
 import { PrismaClient } from '@prisma/client';
 import { auth } from '@/app/api/auth/[...nextauth]/auth'
 
+
 interface Post {
     title: string;
     description: string;
     location: string;
     status: string;
+    start_time: string;
+    end_time: string;
+    date: string;
     // createdAt: Date;
 }
 
-export const postData = async ({ title, description, location, status }: Post) => {
+export const postData = async ({ start_time, end_time, date, title, description, location, status }: Post) => {
     const prisma = new PrismaClient();
     const session = await auth();
 
@@ -22,7 +26,10 @@ export const postData = async ({ title, description, location, status }: Post) =
                 description: description,
                 location: location,
                 status: status,
-                userEmail: session?.user?.email!
+                userEmail: session?.user?.email!,
+                start_time: start_time,
+                end_time: end_time,
+                date: date
 
 
             }

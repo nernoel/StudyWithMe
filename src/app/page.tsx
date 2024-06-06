@@ -1,4 +1,4 @@
-import UserPosts from "./components/UserPosts";
+import UserPosts from "./components/MyPosts";
 import AllPosts from "./components/AllPosts"
 import Navbar from "./components/Navbar";
 

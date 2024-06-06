@@ -1,9 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { auth } from "@/app/api/auth/[...nextauth]/auth";
 import Post from "@/app/components/Post";
-import CreatePostForm from "@/app/components/CreatePost/CreatePost";
 
-export default async function UserPosts() {
+export default async function AllPosts() {
     const prisma = new PrismaClient();
     const session = await auth();
    

@@ -27,7 +27,10 @@ model User {
 model Post {
   id          String  @id @default(uuid())
   title       String
-  description String
+  start_time  String
+  end_time    String
+  date        String
+  description String  
   location    String
   status      String 
 
