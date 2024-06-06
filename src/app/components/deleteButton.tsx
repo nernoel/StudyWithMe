@@ -1,31 +1,18 @@
-'use client'
+"use client";
 
-import { useEffect } from "react"
-import { PrismaClient } from '@prisma/client';
-import { UUID } from "crypto";
+import { useRouter } from "next/navigation";
 
-const client = new PrismaClient;
-    const handleDelete = async (postID: UUID) => {
-        try {
-            await client.post.delete({
-                where: {
-                  id: postID
-                },
-              })
-              console.log("Post successfully deleted");
-        } catch(error){
-            console.error("Error deleting post!");
-        } finally {
-            client.$disconnect
-        }
+export default function DeleteButton({ id }: { id: string }) {
+  const router = useRouter();
+  const handleDelete = async (id: string) => {
+    try {
+      await fetch(`/api/posts/${id}`, {
+        method: "Delete",
+      });
+      router.push("/");
+    } catch (error) {
+      console.log("error ===> ", error);
     }
+  };
 
-
-export default function deleteButton(){
-    return (
-        <div>
-            <button onClick={handleDelete(pos)}></button>
-        </div>
-    )
-
-}
+  return <button onClick={() => handleDelete(id)}>Delete</button>;

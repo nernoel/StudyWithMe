@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { auth } from '@/app/api/auth/[...nextauth]/auth';
 import { UUID } from 'crypto';
+import { start } from 'repl';
 
 interface UserPost {
     id: UUID;
@@ -144,37 +145,46 @@ export default async function MyPost({ id, start_time, end_time, date, title, de
 
 
     return (
-        <div className='bg-slate-900 rounded-lg'>
-            <div className='rounded-lg border-solid border-2 border-sky-200 align-items-center flex flex-col shadow-2xl'>
-                <div className="relative">
-                    {sessionIsActive ? (
-                        <span className="top-2 left-12 absolute w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                    ) : (
-                        <span className="top-2 left-12 absolute w-3.5 h-3.5 bg-red-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                    )}
-                    {imageUrl ? (
-                        <img className="mt-1 ml-3 h-12 w-12 rounded-full" src={imageUrl} />
-                    ) : (
-                        <p>Image not found</p>
-                    )}
-                    <span className='ml-3 text-gray-900 text-xl'>Posted by {userName} </span>
-                </div>
+        <div>
+            <div className="mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow">
+            <img src={imageUrl!} className="mt-1 ml-3 h-12 w-12 rounded-full" alt=""/>
+            <div className="p-4">
+            <p className="mb-1 text-sm text-primary-500">{userName} • <time>{date}</time></p>
+            <h3 className="text-xl font-medium text-gray-900">{title}</h3>
+            <p className="mt-1 text-gray-500">{description}</p>
+            <div className="mt-4 flex gap-2">
+            <span
+        className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-600"
+      >
+        {start_time} - {end_time}
+      </span>
+      <span
+        className="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-600"
+      >
+        {location}
+      </span>
+      
+            </div>
+            <span
+        className="mt-2 inline-flex items-center gap-1 rounded-full bg-orange-50 px-2 py-1 text-xs font-semibold text-orange-600 hover:cursor-pointer"
+      >
+        Edit
+      </span>
 
-                <span className='ml-3 text-gray-50 text-2xl font-bold mb-1 font-extrabold'>{title}</span>
-                <span className='ml-3 text-gray-50'>{description}</span>
-                <div className='flex ml-3 mt-3 mb-3'>
-                    <span className='mr-2 bg-indigo-50 text-indigo-500 px-2 py-2 rounded-full font-extrabold'>{date}</span>
-                    <span className='bg-blue-50 text-blue-500 px-2 py-2 rounded-full font-extrabold'>{start_time} - {end_time}</span>
-                </div>
+      <span
+        className="mt-2 inline-flex items-center gap-1 rounded-full bg-red-50 px-2 py-1 text-xs font-semibold text-red-600 hover:cursor-pointer"
+      >
+        Delete
+      </span>
 
-               
-                
-                <div className='ml-3 mt-3 mb-3'><span className='bg-cyan-50 text-cyan-500 px-2 py-2 rounded-full font-extrabold'>Location: {location}</span></div>
 
-                <div className='flex'>
-                <div className='ml-3 mt-3 mb-3'><span className='bg-yellow-500 text-yellow-50 px-2 py-2 rounded-full font-extrabold'>Edit</span></div>
-                <div className='ml-3 mt-3 mb-3'></div>
-                </div>
+
+
+            </div>
+
+
+
+
             </div>
         </div>
     );

@@ -9,9 +9,9 @@ export default function Navbar(){
         router.push('/api/auth/signout')
     }
     return (
-        <div className="mt-8 ml-4 mr-4 fixed top-0 left-0 right-0 flex justify-between items-center h-16 bg-gradient-to-r to-gray-100 from-sky-900 rounded-full px-4">
+        <div className="mt-8 ml-4 mr-4 fixed top-0 left-0 right-0 flex justify-between items-center h-16 bg-gray-200 rounded-full px-4">
           <div className="flex items-center">
-          <h1 className="text-4xl font-extrabold"><span className="text-transparent bg-clip-text bg-gray-200">StudyWithMe</span></h1>
+          <h1 className="text-4xl font-extrabold"><span className="text-transparent bg-clip-text bg-gray-900">MYSTUDY</span></h1>
           </div>
           
           <div className="flex items-center">
