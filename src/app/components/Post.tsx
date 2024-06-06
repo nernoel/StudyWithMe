@@ -12,6 +12,7 @@ interface Post {
 // instantiate prisma client
 const client = new PrismaClient();
 
+
 // Post component function
 export default async function Post({ title, description, location, status }: Post) {
 
@@ -125,6 +126,10 @@ export default async function Post({ title, description, location, status }: Pos
         }
     };
 
+    // Fetch session status
+    const session = await auth();
+    const sessionIsActive = !!session && !!session.user;
+
 
     // defining user properties
     const userName = await FetchUserName();
@@ -132,22 +137,32 @@ export default async function Post({ title, description, location, status }: Pos
     const email = await FetchPostOwnerEmail();
 
 
-    return (    
+    return (
         <div>
-            <div className='border-solid border-2 border-sky-200 align-items-center flex flex-col shadow-2xl'>
-                
-                <span>{imageUrl ? <img className="mt-1 ml-3 h-12 w-12 rounded-full"src={imageUrl} /> : <p>Image not found</p>}</span>
+            <div className='rounded-lg border-solid border-2 border-sky-200 align-items-center flex flex-col shadow-2xl'>
+                <div className="relative">
+                    {sessionIsActive ? (
+                        <span className="top-2 left-12 absolute w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                    ) : (
+                        <span className="top-2 left-12 absolute w-3.5 h-3.5 bg-red-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                    )}
+                    {imageUrl ? (
+                        <img className="mt-1 ml-3 h-12 w-12 rounded-full" src={imageUrl} />
+                    ) : (
+                        <p>Image not found</p>
+                    )}
+                    <span className='ml-3 text-gray-200'>Posted by {userName} </span>
+                </div>
+
                 <span className='ml-3 text-gray-200 text-2xl font-bold mb-1'>{title}</span>
                 <span className='ml-3 text-gray-200'>{description}</span>
-                {/*<div className='mt-4 mb-3'><span className='bg-indigo-50 text-indigo-500 px-2 py-2'>{status}</span></div> */}
-                <div className='ml-3 mt-3 mb-3' ><span className='bg-blue-50 text-blue-500 px-2 py-2 rounded-full'>{location}</span></div>
+                <div className='ml-3 mt-3 mb-3'><span className='bg-blue-50 text-blue-500 px-2 py-2 rounded-full'>Location {location}</span></div>
                 <div className='mt-3 mb-3'>
-                <a href={`mailto:${email}`}>
-                <span className='ml-3 bg-green-50 text-green-500 px-2 py-2 rounded-full'>Message</span>
-                </a>
+                    <a href={`mailto:${email}`}>
+                        <span className='ml-3 bg-green-50 text-green-500 px-2 py-2 rounded-full'>Message</span>
+                    </a>
                 </div>
-             
             </div>
         </div>
-    )
+    );
 }
