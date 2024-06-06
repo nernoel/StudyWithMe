@@ -53,7 +53,6 @@ export default async function Post({ title, description, location, status }: Pos
     };
 
     // fetch user email
-    // function to fetch user image
     const FetchPostOwnerEmail = async () => {
         "use server";
 
@@ -89,6 +88,7 @@ export default async function Post({ title, description, location, status }: Pos
         }
     };
 
+    const email = await FetchPostOwnerEmail();
 
     // function to fetch user image
     const FetchUserImage = async () => {
@@ -103,7 +103,7 @@ export default async function Post({ title, description, location, status }: Pos
 
             const data = await client.user.findUnique({
                 where: {
-                    email: session.user.email
+                    email: `${email}`
                 },
                 select: {
                     image: true,
@@ -134,7 +134,7 @@ export default async function Post({ title, description, location, status }: Pos
     // defining user properties
     const userName = await FetchUserName();
     const imageUrl = await FetchUserImage();
-    const email = await FetchPostOwnerEmail();
+    
 
 
     return (
