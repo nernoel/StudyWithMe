@@ -15,4 +15,4 @@ export default function DeleteButton({ id }: { id: string }) {
     }
   };
 
-  return <button onClick={() => handleDelete(id)}>Delete</button>;
+  return <button onClick={() => handleDelete(id)}>Delete</button>};
