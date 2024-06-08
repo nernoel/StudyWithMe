@@ -1,27 +1,38 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 
 export default function Navbar(){
-    const router = useRouter();
+  const router = useRouter();
 
     const handleClick = () => {
         router.push('/api/auth/signout')
     }
-    return (
-        <div className="mt-8 ml-4 mr-4 fixed top-0 left-0 right-0 flex justify-between items-center h-16 bg-gray-200 rounded-full px-4">
-          <div className="flex items-center">
-          <h1 className="text-4xl font-extrabold"><span className="text-transparent bg-clip-text bg-gray-900">MYSTUDY</span></h1>
-          </div>
-          
-          <div className="flex items-center">
-           {/*<a className="text-lg font-normal text-gray-800 lg:text-xl mx-3" href="">My Posts</a> */}
-            {/*<a className="text-lg font-normal text-gray-800 lg:text-xl mx-3" href="">All Posts</a>*/}
-          </div>
-          
-          <div className="flex items-center">
-            <button type="button" onClick={handleClick} className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Sign out</button>
-          </div>
-        </div>
-      );
+  return (
+    <div>
+      <header className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white text-sm py-4 dark:bg-neutral-800">
+  <nav className="max-w-[85rem] w-full mx-auto px-4 flex flex-wrap basis-full items-center justify-between" aria-label="Global">
+    <span className="sm:order-1 flex-none text-xl font-semibold dark:text-white">StudyWithMe</span>
+    <div className="sm:order-3 flex items-center gap-x-2">
+      <button type="button" className="sm:hidden hs-collapse-toggle p-2.5 inline-flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-neutral-700 dark:text-white dark:hover:bg-white/10" data-hs-collapse="#navbar-alignment" aria-controls="navbar-alignment" aria-label="Toggle navigation">
+        <svg className="hs-collapse-open:hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+        <svg className="hs-collapse-open:block hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+      <button onClick={handleClick} type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
+        Signout
+      </button>
+    </div>
+    <div id="navbar-alignment" className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:grow-0 sm:basis-auto sm:block sm:order-2">
+      <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0 sm:ps-5">
+        <a className="font-medium text-blue-500" href="#" aria-current="page"></a>
+        <a className="font-medium text-gray-600 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500" href="#"></a>
+        <a className="font-medium text-gray-600 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500" href="#"></a>
+        <a className="font-medium text-gray-600 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500" href="#"></a>
+        
+      </div>
+    </div>
+  </nav>
+</header>
+    </div>
+  )
 }

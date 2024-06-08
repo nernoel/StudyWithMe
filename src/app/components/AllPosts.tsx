@@ -18,18 +18,20 @@ export default async function AllPosts() {
 
     return (
         <div className="container mx-auto p-4">
-            <h1 className="text-gray-200 text-2xl font-bold mb-4">OTHER STUDENT POSTS</h1>
+            <h1 className="text-gray-200 text-2xl font-bold mb-4 text-gray-900">⭐️ OTHER STUDENT POSTS</h1>
             <div className="">
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {userPosts.map(post => (
                     <Post 
-                        key={post.id} 
+                        key={post.id}
                         title={post.title}
                         description={post.description}
                         location={post.location}
-                        status={post.status}
-                    />
+                        status={post.status} 
+                        start_time={""} 
+                        end_time={""} 
+                        date={""}                    />
                 ))}
             </div>
         </div>

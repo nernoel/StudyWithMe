@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 const app = express();
 
 const corsOptions = {
-    origin: 'http://localhost:3001', // Specify the allowed origin
+    origin: 'http://localhost:3001', // Specify the allowed origin // CHANGE LATER WHEN DEPLOYED!
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify the allowed methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Specify the allowed headers
   };

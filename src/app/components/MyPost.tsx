@@ -166,11 +166,12 @@ export default async function MyPost({ id, start_time, end_time, date, title, de
       </span>
       
             </div>
-            <span
+            {/*<span
         className="mt-2 inline-flex items-center gap-1 rounded-full bg-orange-50 px-2 py-1 text-xs font-semibold text-orange-600 hover:cursor-pointer"
       >
         Edit
       </span>
+      */}
 
       <DeleteButton id={id} />
 
