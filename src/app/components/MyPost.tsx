@@ -1,10 +1,11 @@
 import { PrismaClient } from '@prisma/client';
 import { auth } from '@/app/api/auth/[...nextauth]/auth';
-import { UUID } from 'crypto';
-import { start } from 'repl';
+
+import DeleteButton from '@/app/components/DeleteButton';
 
 interface UserPost {
-    id: UUID;
+
+    id: String;
     title: string;
     description: string;
     location: string;
@@ -171,11 +172,7 @@ export default async function MyPost({ id, start_time, end_time, date, title, de
         Edit
       </span>
 
-      <span
-        className="mt-2 inline-flex items-center gap-1 rounded-full bg-red-50 px-2 py-1 text-xs font-semibold text-red-600 hover:cursor-pointer"
-      >
-        Delete
-      </span>
+      <DeleteButton id={id} />
 
 
 
