@@ -16,8 +16,6 @@ export default async function MyPosts() {
 
     return (
         <div className="mt-4 container mx-auto p-4">
-
-           
             <h1 className="text-gray-900 text-3xl font-bold mb-2">👋 Welcome {session?.user?.name!}</h1>
             <hr className="mb-24"></hr>
             <h1 className="text-gray-900 text-2xl font-bold mb-4 -mt-8">📚 My study posts</h1>

@@ -122,7 +122,7 @@ export default async function MyPost({ id, start_time, end_time, date, title, de
             if (!data) {
                 throw new Error("User not found");
             }
-            return data.image;
+            return data?.image;
 
         } catch (error) {
             console.error("Error fetching user image:", error);
@@ -147,8 +147,9 @@ export default async function MyPost({ id, start_time, end_time, date, title, de
 
     return (
         <div>
+            {sessionIsActive ? 
             <div className="mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow">
-            <img src={imageUrl!} className="mt-1 ml-3 h-12 w-12 rounded-full" alt=""/>
+            <img src={imageUrl} className="mt-1 ml-3 h-12 w-12 rounded-full" alt=""/>
             <div className="p-4">
             <p className="mb-1 text-sm text-primary-500">{userName} • <time>{date}</time></p>
             <h3 className="text-xl font-medium text-gray-900">{title}</h3>
@@ -166,12 +167,7 @@ export default async function MyPost({ id, start_time, end_time, date, title, de
       </span>
       
             </div>
-            {/*<span
-        className="mt-2 inline-flex items-center gap-1 rounded-full bg-orange-50 px-2 py-1 text-xs font-semibold text-orange-600 hover:cursor-pointer"
-      >
-        Edit
-      </span>
-      */}
+            
 
       <DeleteButton id={id} />
 
@@ -183,7 +179,8 @@ export default async function MyPost({ id, start_time, end_time, date, title, de
 
 
 
-            </div>
+            </div> : <p>Please login to view your posts!</p>}
+            
         </div>
     );
 }
