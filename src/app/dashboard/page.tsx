@@ -1,13 +1,12 @@
-import AllPosts from "../components/AllPosts";
-import MyPosts from "../components/MyPosts";
-import Navbar from "../components/Navbar";
+import NavbarSignOut from "../components/layout/navigation/Navbar-signout";
+import OtherPosts from "../components/layout/dashboard/StudentPosts/StudentPosts";
 
 export default function Dashboard(){
   return (
     <div>
-      <Navbar />
-      <MyPosts />
-      <AllPosts />
+      <NavbarSignOut />
+      <OtherPosts />
+      
       
     </div>
   )
