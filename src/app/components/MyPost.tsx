@@ -55,7 +55,6 @@ export default async function MyPost({ id, start_time, end_time, date, title, de
             return null;
 
         } finally {
-
             await client.$disconnect();
         }
     };
@@ -149,7 +148,11 @@ export default async function MyPost({ id, start_time, end_time, date, title, de
         <div>
             {sessionIsActive ? 
             <div className="mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow">
-            <img src={imageUrl} className="mt-1 ml-3 h-12 w-12 rounded-full" alt=""/>
+            <div className="relative">
+            <img className="w-10 h-10 rounded" src={session.user?.image} alt="" />
+            <span className="absolute bottom-0 left-8 transform translate-y-1/4 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+            
+            </div>
             <div className="p-4">
             <p className="mb-1 text-sm text-primary-500">{userName} • <time>{date}</time></p>
             <h3 className="text-xl font-medium text-gray-900">{title}</h3>

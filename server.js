@@ -37,7 +37,45 @@ app.delete('/posts/delete/:id', async (req, res) => {
         }
     })
     res.json(postToDelete);
-})
+});
+
+// Send a message
+app.post('/send', async (req, res) => {
+    const { senderId, recipientId, content } = req.body;
+  
+    try {
+      const message = await prisma.message.create({
+        data: {
+          senderId,
+          recipientId,
+          content
+        }
+      });
+      res.status(201).json(message);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to send message' });
+    }
+  });
+
+// Get messages for a user
+app.get('/inbox/:userId', async (req, res) => {
+    const { userId } = req.params;
+  
+    try {
+      const messages = await prisma.message.findMany({
+        where: { recipientId: userId },
+        include: {
+          sender: {
+            select: { name: true }
+          }
+        },
+        orderBy: { timestamp: 'desc' }
+      });
+      res.status(200).json(messages);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch messages' });
+    }
+  });
 
 
 

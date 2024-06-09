@@ -28,7 +28,6 @@ export default async function Post({id, start_time, end_time, date, title, descr
             select : {
                 title: true,
             }
-
            
         })
         return data?.title;
@@ -49,9 +48,38 @@ export default async function Post({id, start_time, end_time, date, title, descr
         return data?.date;
     }
 
+    const fetchPostStartTime = async () => {
+        const data = await client.post.findUnique({
+            where: {
+                id: id
+            },
+
+            select : {
+                start_time: true,
+            }
+        })
+        return data?.start_time;
+    }
+
+    const fetchPostEndTime = async () => {
+        const data = await client.post.findUnique({
+            where: {
+                id: id
+            },
+
+            select : {
+                end_time: true,
+            }
+        })
+        return data?.end_time;
+    }
+
+
 
     const postTitle = fetchPostTitle();
     const postDate = fetchPostDate();
+    const postStartTime = fetchPostStartTime();
+    const postEndTime = fetchPostEndTime();
 
     return (
         <div>
@@ -65,7 +93,7 @@ export default async function Post({id, start_time, end_time, date, title, descr
             <span
         className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-600"
       >
-        {start_time} - {end_time}
+        {postStartTime} - {postEndTime}
       </span>
       <span
         className="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-600"
