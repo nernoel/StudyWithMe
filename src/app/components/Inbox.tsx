@@ -42,7 +42,7 @@ const Inbox: React.FC<InboxProps> = ({ userId }) => {
 
   return (
     <div>
-      <h2>Inbox</h2>
+      <p className="text-4xl font-black text-gray-900 dark:text-white">Inbox</p>
       {messages.length === 0 ? (
         <div>No messages</div>
       ) : (
