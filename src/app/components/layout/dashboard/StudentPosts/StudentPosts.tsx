@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { auth } from "@/app/api/auth/[...nextauth]/auth";
 
+
 import StudentPost from "@/app/components/layout/dashboard/StudentPosts/StudentPost";
 
 export default async function OtherPosts() {
@@ -30,10 +31,11 @@ export default async function OtherPosts() {
                         title={post.title}
                         description={post.description}
                         location={post.location}
-                        status={post.status} 
-                        start_time={""} 
-                        end_time={""} 
-                        date={""}                    />
+                        status={post.status}
+                        start_time={""}
+                        end_time={""}
+                        date={""} c
+                        createdAt={undefined}                                      />
                 ))}
             </div>
         </div>
