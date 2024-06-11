@@ -4,9 +4,13 @@ import React, { useState } from 'react';
 import Modal from './Modal';
 import MessageForm from './MessageForm';
 
-const App: React.FC = () => {
+export default async function MessagesPage(senderId, recipientId){
+  
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showAlert, setShowAlert] = useState<boolean>(false);
+
+}
+  
 
   const senderId = "123"; // Example sender ID
   const recipientId = "456"; // Example recipient ID
@@ -84,4 +88,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+

@@ -40,8 +40,9 @@ app.delete('/posts/delete/:id', async (req, res) => {
 });
 
 // Send a message
-app.post('/send', async (req, res) => {
-    const { senderId, recipientId, content } = req.body;
+app.post('/send/:recipientId', async (req, res) => {
+  const { recipientId } = req.params;
+    const { senderId, content } = req.body;
   
     try {
       const message = await prisma.message.create({
@@ -56,6 +57,25 @@ app.post('/send', async (req, res) => {
       res.status(500).json({ error: 'Failed to send message' });
     }
   });
+
+  // send a reply message 
+  app.post('/send/:recipientId', async (req, res) => {
+    const { recipientId } = req.params;
+      const { senderId, content } = req.body;
+    
+      try {
+        const message = await prisma.message.create({
+          data: {
+            senderId,
+            recipientId,
+            content
+          }
+        });
+        res.status(201).json(message);
+      } catch (error) {
+        res.status(500).json({ error: 'Failed to send message' });
+      }
+    });
 
 // Get messages for a user
 app.get('/inbox/:userId', async (req, res) => {

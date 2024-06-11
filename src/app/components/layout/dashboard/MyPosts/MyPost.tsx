@@ -2,10 +2,6 @@ import { auth } from '@/app/api/auth/[...nextauth]/auth';
 import DeleteButton from '@/app/components/DeleteButton';
 import { PrismaClient } from '@prisma/client';
 
-
-
-
-
 interface UserPost {
     id: string;
     title: string;
@@ -110,7 +106,6 @@ export default async function Post({id, start_time, end_time, date, title, descr
     
 
         
-
     const postTitle = await fetchPostTitle();
     const postDate = await fetchPostDate();
     const postStartTime = await fetchPostStartTime();
