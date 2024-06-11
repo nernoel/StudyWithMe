@@ -65,12 +65,12 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <button className="" onClick={toggleModal}>
-      <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600">Send Message</span>
+      <button className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600" onClick={toggleModal}>
+        Send Message
       </button>
       <Modal show={showModal} handleClose={toggleModal} handleSend={handleSendMessage} />
       {showAlert && (
-        <div className="absolute right-4 rounded-xl border border-gray-100 bg-white p-4 shadow-lg">
+        <div className="absolute right-4 top-4 rounded-xl border border-gray-100 bg-white p-4 shadow-lg">
           <div className="flex items-start gap-4">
             <span className="text-green-600">
               <svg
@@ -88,12 +88,10 @@ const App: React.FC = () => {
                 />
               </svg>
             </span>
-
             <div className="flex-1">
-              <strong className="block font-medium text-gray-900"> Sent! </strong>
+              <strong className="block font-medium text-gray-900">Sent!</strong>
               <p className="mt-1 text-sm text-gray-700">Your message has been sent!</p>
             </div>
-
             <button
               className="text-gray-500 transition hover:text-gray-600"
               onClick={() => setShowAlert(false)}

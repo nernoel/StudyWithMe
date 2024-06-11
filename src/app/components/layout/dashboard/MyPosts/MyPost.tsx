@@ -1,7 +1,9 @@
 import { auth } from '@/app/api/auth/[...nextauth]/auth';
 import DeleteButton from '@/app/components/DeleteButton';
 import { PrismaClient } from '@prisma/client';
-import { create } from 'domain';
+
+
+
 
 
 interface UserPost {
@@ -13,16 +15,12 @@ interface UserPost {
     start_time: string;
     end_time: string;
     date: string;
-    createdAt: Date;
 }
 
-// instantiate prisma client
+
 const client = new PrismaClient();
 
-
-
-// Post component function
-export default async function Post({ createdAt, id, start_time, end_time, date, title, description, location, status }: UserPost) {
+export default async function Post({id, start_time, end_time, date, title, description, location, status }: UserPost) {
     
     const fetchPostTitle = async () => {
         const data = await client.post.findUnique({

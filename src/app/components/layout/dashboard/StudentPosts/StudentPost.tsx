@@ -1,6 +1,6 @@
 import { auth } from '@/app/api/auth/[...nextauth]/auth';
 import { PrismaClient } from '@prisma/client';
-import MessageButton from "@/app/components/MessageButton";
+import MessageButton from "@/app/components/Message/MessageButton";
 
 interface UserPost {
     id: string;

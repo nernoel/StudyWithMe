@@ -8,6 +8,9 @@ export default function Dashboard(){
       <NavbarSignOut />
       <MyPosts />
       <OtherPosts />
+
+      <h1>Inbox</h1>
+
       
       
     </div>
