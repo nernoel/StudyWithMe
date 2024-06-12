@@ -1,6 +1,7 @@
 import { auth } from '@/app/api/auth/[...nextauth]/auth';
-import DeleteButton from '@/app/components/Buttons/MyPostDeleteButton';
+import MessageButton from '@/app/components/Buttons/MessageButton';
 import { PrismaClient } from '@prisma/client';
+import { title } from 'process';
 
 
 interface MyPost {
@@ -75,18 +76,19 @@ export default async function Post({ id }: MyPost) {
         });
         return data?.user.name;
     };
+    const postOwner = await fetchPostOwnerName();
 
     // Fetching post owner image
     const fetchPostOwnerImage = async () => {
-        const data = await client.user.findUnique({
+        const data = await client.post.findUnique({
             where: {
-                id: session?.user?.id
+                id: id
             },
             select: {
-               image: true,
+               user: true,
             }
         });
-        return data?.image;
+        return data?.user.image;
     };
 
     // Fetching post location
@@ -115,6 +117,7 @@ export default async function Post({ id }: MyPost) {
         return data?.date;
     };
 
+    // fetching session
     // fetch post owner session
     const fetchSession = async () => {
         const data = await client.post.findUnique({
@@ -138,10 +141,9 @@ export default async function Post({ id }: MyPost) {
         return data?.user.sessions;
     };
 
-    // Calling fetching post owner data
-    const postOwner = await fetchPostOwnerName();
-    const postOwnerImage = session?.user?.image!
-    const userSession = await fetchSession();
+    
+   
+
     // Calling fetching post data
     const postTitle = await fetchPostTitle();
     const postDescription = await fetchPostDescription();
@@ -149,6 +151,7 @@ export default async function Post({ id }: MyPost) {
     const postEndTime = await fetchPostEndTime();
     const postLocation = await fetchPostLocation();
     const postDate = await fetchPostDate();
+    const image = await fetchPostOwnerImage();
 
     const convertTo12HourFormat = (time24: String) => {
         const [hours, minutes] = time24.split(':');
@@ -169,22 +172,21 @@ export default async function Post({ id }: MyPost) {
 
         return `${formattedHours}:${minutes} ${period}`;
     };
-
+    const userSession = await fetchSession();
    
     
     return (
         <div>
             <div className="mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow">
             <div className="relative">
-              
-                <img className="mt-1 ml-3 h-12 w-12 rounded-full" src={postOwnerImage != null ? postOwnerImage : "/AnonUser.png" } alt=""></img>
+                <img className="mt-1 ml-3 h-12 w-12 rounded-full" src={image != null ? image : "/AnonUser.png" } alt=""></img>
                 {userSession ? <span className="bottom-0 left-12 absolute  w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></span>
                 :  <span className="bottom-0 left-12 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white rounded-full"></span>}
                
                 </div>
                 <div className="p-4">
                     
-                   
+                    <p className="mb-1 text-sm text-primary-500">Posted by: {postOwner}</p>
                     <h3 className="text-xl font-medium text-gray-900">{postTitle}</h3>
                     <p className="mt-1 text-gray-500">{postDescription}</p>
                     
@@ -199,7 +201,7 @@ export default async function Post({ id }: MyPost) {
 
                        
                     </div>
-                    <DeleteButton id={id} />
+                    <MessageButton />
                 </div>
             </div>
         </div>

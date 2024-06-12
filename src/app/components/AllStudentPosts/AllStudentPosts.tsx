@@ -2,14 +2,14 @@ import { PrismaClient } from "@prisma/client";
 import { auth } from "@/app/api/auth/[...nextauth]/auth";
 
 
-import StudentPost from "@/app/components/layout/dashboard/StudentPosts/StudentPost";
+import StudentPost from "@/app/components/AllStudentPosts/StudentPost";
 
-export default async function OtherPosts() {
+export default async function AllStudentPosts() {
     const prisma = new PrismaClient();
     const session = await auth();
    
     // find all posts that are not for the signed-in user
-    const userPosts = await prisma.post.findMany({
+    const studentPosts = await prisma.post.findMany({
         
         where: {
             userEmail: {
@@ -24,18 +24,17 @@ export default async function OtherPosts() {
             <div className="">
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {userPosts.map(post => (
-                    <StudentPost 
+                {studentPosts.map(post => (
+                    <StudentPost
                         id={post.id}
                         key={post.id}
                         title={post.title}
                         description={post.description}
                         location={post.location}
-                        status={post.status}
                         start_time={""}
                         end_time={""}
-                        date={""} c
-                        createdAt={undefined}                                      />
+                        date={""} 
+                       />
                 ))}
             </div>
         </div>
