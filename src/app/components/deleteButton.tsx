@@ -10,7 +10,12 @@ export default function DeleteButton({ id }: { id: String }) {
 
     try {
       await axios.delete(`http://localhost:3000/posts/delete/${id}`);
-      router.push("/dashboard");
+      // router.push("/pages/dashboard");
+
+      // Set timeout to refresh the page
+      setTimeout(() => {
+        window.location.reload();
+    },100);
     } catch (error) {
       console.log("error ===> ", error);
     }

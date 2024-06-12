@@ -1,13 +1,11 @@
-import Navbar from '@/app/components/layout/navigation/Navbar-signin'
-import Inbox from './components/Inbox'
+import Navbar from "./components/Navbar/Navbar-signIn"
 
-import {auth} from '@/app/api/auth/[...nextauth]/auth'
-export default async function Index(){
-  const session = await auth();
+export default async function Homepage(){
+
   return (
     <div>
-       <Navbar />
-       <Inbox userId={session?.user?.id!} />
+      <Navbar />
+      
        
     </div>
   )

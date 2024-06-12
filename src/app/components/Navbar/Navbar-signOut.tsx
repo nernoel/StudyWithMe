@@ -1,10 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-
 import { auth } from '@/app/api/auth/[...nextauth]/auth'
 
-
-export default async function NavbarSignIn(){
+export default async function NavbarSignOut(){
 const session = await auth();
   return (
     <nav className="border-solid sticky top-0 border-neutral-900 w-full border-b py-4 bg-neutral-900 z-50 bg-inherit">
@@ -19,9 +17,9 @@ const session = await auth();
             </a>
           </div>
           <div className="flex items-center">
-          <Link href={!session ? "/api/auth/signin" : ""}>
+          <Link href={session ? "/api/auth/signout" : "/"}>
           <button type='button' className='py-2.5 px-6 text-sm rounded-full bg-indigo-500 text-white cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-indigo-700'>
-            Sign in</button>
+            Sign out</button>
           </Link>
           
           </div>
@@ -30,5 +28,4 @@ const session = await auth();
     </nav>
   );
 };
-
 

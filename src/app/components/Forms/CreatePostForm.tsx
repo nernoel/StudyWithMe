@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react';
-import { postData } from './index';
+import { FetchPostData } from '../Helper/FetchPostData';
+
 
 
 export default function CreatePostForm() {
@@ -11,21 +12,37 @@ export default function CreatePostForm() {
     const [start_time, setStartTime] = useState<string>("");
     const [end_time, setEndTime] = useState<string>("");
     const [date, setDate] = useState<string>("");
-    const [status, setStatus] = useState<string>("");
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    // Handle creating post 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading(true); // start loading
         try {
-            const result = await postData({ title, description, location, status, start_time, end_time, date});
+
+            // Fetch all post data to pass into form
+            const result = await FetchPostData({title, description, location, start_time, end_time, date});
             console.log('Post created successfully:', result);
+
+            // close modal when created
             setIsModalOpen(false);  
+
+            // Set timeout to refresh the page
+            setTimeout(() => {
+                window.location.reload();
+            },100);
             
         } catch (error) {
             console.error('Error creating post:', error);
-        }
+        }// finally {
+            //setLoading(false); // stop loading
+        //}
     };
 
+    // If user description too long prompt user to let them know
     const handleChange = (e: any) => {
         const inputValue = e.target.value;
         const words = inputValue.split(' ').filter(Boolean);
@@ -34,10 +51,12 @@ export default function CreatePostForm() {
         }
     };
 
+    // Open modal window
     const openModal = () => {
         setIsModalOpen(true);
     };
 
+    // Close modal window
     const closeModal = () => {
         setIsModalOpen(false);
     };
@@ -50,7 +69,7 @@ export default function CreatePostForm() {
             >
                 Create a new post
             </button>
-
+            
             {isModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-neutral-950 p-6 rounded-lg shadow-lg w-full max-w-md">
@@ -119,7 +138,7 @@ export default function CreatePostForm() {
                                 <label htmlFor="start_time" className="block text-gray-200">Enter a start time</label>
                                 <input
                                     id="start_time"
-                                    type="text"
+                                    type="time"
                                     value={start_time}
                                     onChange={(e) => setStartTime(e.target.value)}
                                     className="mt-1 p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring focus:ring-gray-400"
@@ -130,7 +149,7 @@ export default function CreatePostForm() {
                                 <label htmlFor="end_time" className="block text-gray-200">Enter a end time</label>
                                 <input
                                     id="end_time"
-                                    type="text"
+                                    type="time"
                                     value={end_time}
                                     onChange={(e) => setEndTime(e.target.value)}
                                     className="mt-1 p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring focus:ring-gray-400"
@@ -141,7 +160,7 @@ export default function CreatePostForm() {
                                 <label htmlFor="date" className="block text-gray-200">Enter a Date</label>
                                 <input
                                     id="date"
-                                    type="text"
+                                    type="date"
                                     value={date}
                                     onChange={(e) => setDate(e.target.value)}
                                     className="mt-1 p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring focus:ring-gray-400"
