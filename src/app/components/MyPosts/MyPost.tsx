@@ -10,6 +10,8 @@ interface MyPost {
 export default async function Post({ id }: MyPost) {
     const client = new PrismaClient();
     const session = await auth();
+    const userId = session?.user?.id; // Assuming session contains the logged-in user's ID
+
     
     // Fetching post title
     const fetchPostTitle = async () => {

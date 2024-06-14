@@ -1,7 +1,6 @@
 import { auth } from '@/app/api/auth/[...nextauth]/auth';
 import MessageButton from '@/app/components/Buttons/MessageButton';
 import { PrismaClient } from '@prisma/client';
-import { title } from 'process';
 
 
 interface MyPost {
@@ -201,7 +200,7 @@ export default async function Post({ id }: MyPost) {
 
                        
                     </div>
-                    <MessageButton />
+                    <MessageButton image={image} />
                 </div>
             </div>
         </div>
