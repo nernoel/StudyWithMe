@@ -67,10 +67,11 @@ const Inbox: React.FC<{ userId: string }> = ({ userId }) => {
                 message={message.content}
                 sender={message.sender.name}
                 timestamp={message.timestamp}
-                isOwnMessage={message.sender.name === 'Your User Name'} // Replace with actual user check
+                isOwnMessage={message.sender.name === 'Your User Name'}
                 onReply={handleReply}
-                messageId={message.id}
-              />
+                messageId={message.id} 
+                userId={userId} 
+                recipientId={userId}             />
             </li>
           ))}
         </ul>
