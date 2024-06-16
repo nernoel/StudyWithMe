@@ -22,6 +22,12 @@ const Modal: React.FC<ModalProps> = ({ image, show, handleClose, handleSend, rec
     const handleSendMessage = async (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         await axios.post(`http://localhost:3000/send/${recipientId}`, { senderId, content: message });
+        
+        let content = {
+            "senderId": senderId,
+            "recipientId": recipientId,
+            "content": message
+        }
         handleSend(message);
         setMessage('');
     };

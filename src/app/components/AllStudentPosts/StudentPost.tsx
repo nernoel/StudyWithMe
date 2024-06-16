@@ -90,6 +90,20 @@ export default async function Post({ id }: MyPost) {
         return data?.user.image;
     };
 
+    // Fetching post owner ID
+    const fetchPostOwnerID = async () => {
+        const data = await client.post.findUnique({
+            where: {
+                id: id
+            },
+            select: {
+               user: true,
+               
+            }
+        });
+        return data?.user.id;
+    };
+
     // Fetching post location
     const fetchPostLocation = async () => {
         const data = await client.post.findUnique({
@@ -151,6 +165,7 @@ export default async function Post({ id }: MyPost) {
     const postLocation = await fetchPostLocation();
     const postDate = await fetchPostDate();
     const image = await fetchPostOwnerImage();
+    const postOwnerID = await fetchPostOwnerID();
 
     const convertTo12HourFormat = (time24: String) => {
         const [hours, minutes] = time24.split(':');
@@ -200,7 +215,10 @@ export default async function Post({ id }: MyPost) {
 
                        
                     </div>
-                    <MessageButton image={image} />
+                    <MessageButton 
+                    senderId={session?.user?.id!}
+                    recipientId={postOwnerID!}
+                    image={image} />
                 </div>
             </div>
         </div>

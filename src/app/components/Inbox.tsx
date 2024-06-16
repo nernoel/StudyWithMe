@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ChatBubble from './ChatBubble';
 import Modal from './Modal';
+import {auth} from '@/app/api/auth/[...nextauth]/auth'
 
 interface Message {
   id: string;

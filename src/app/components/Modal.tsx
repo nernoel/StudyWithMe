@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useState, ChangeEvent, MouseEvent } from 'react';
 import axios from 'axios';
 
@@ -21,9 +19,16 @@ const Modal: React.FC<ModalProps> = ({ image, show, handleClose, handleSend, rec
 
   const handleSendMessage = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    await axios.post(`http://localhost:3000/send/${recipientId}`, { senderId, content: message });
-    handleSend(message);
-    setMessage('');
+
+    try {
+      await axios.post(`http://localhost:3000/send/${recipientId}`, { senderId, content: message });
+      handleSend(message);
+      setMessage('');
+      handleClose(); // Optionally close modal after sending
+    } catch (error) {
+      console.error('Error sending message:', error);
+      // Handle error gracefully, e.g., show an error message to the user
+    }
   };
 
   return (
