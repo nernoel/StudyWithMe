@@ -43,7 +43,7 @@ const Modal: React.FC<ModalProps> = ({ image, show, handleClose, handleSend, rec
                         <img className="rounded-full" src={image} alt="Avatar" />
                     </div>
                     <textarea
-                        className="focus:ring-green-500 w-full h-32 p-2 border rounded mb-4"
+                        className="focus:ring-green-500 w-full h-32 p-2 border rounded mb-10"
                         value={message}
                         onChange={handleMessageChange}
                         placeholder="Type your message here..."
@@ -71,7 +71,7 @@ const MessageButton: React.FC<{ recipientId: string; senderId: string; image: st
         setShowModal(false);
         setTimeout(() => {
             setShowAlert(false);
-        }, 3000); // hide alert after 3 seconds
+        }, 3000); 
     };
 
     return (
@@ -81,7 +81,7 @@ const MessageButton: React.FC<{ recipientId: string; senderId: string; image: st
             </button>
             <Modal show={showModal} handleClose={toggleModal} handleSend={handleSendMessage} image={image} recipientId={recipientId} senderId={senderId} />
             {showAlert && (
-                <div className="absolute right-4 top-4 rounded-xl border border-green-500 bg-green-50 p-4 shadow-lg">
+                <div className="mt-16 absolute right-4 top-4 rounded-xl border border-green-500 bg-green-50 p-4 shadow-lg">
                     <div className="flex items-start gap-4">
                         <span className="text-green-600">
                             <svg

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ChatBubble from './ChatBubble';
 import Modal from './Modal';
-import {auth} from '@/app/api/auth/[...nextauth]/auth'
+
 
 interface Message {
   id: string;
@@ -51,14 +51,14 @@ const Inbox: React.FC<{ userId: string }> = ({ userId }) => {
     setReplyToMessageId(null);
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p className='text-transparent bg-clip-text bg-gradient-to-r to-indigo-300 from-purple-300'>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <div className="inbox">
-      <h2 className="text-xl font-bold mb-4">Inbox</h2>
+     <h1 className="mb-4 text-3xl font-extrabold text-gray-200 md:text-5xl lg:text-6xl"><span className="text-transparent bg-clip-text bg-gradient-to-r to-indigo-300 from-purple-300">Inbox</span> </h1>
       {messages.length === 0 ? (
-        <p>No messages.</p>
+        <p className='text-transparent bg-clip-text bg-gradient-to-r to-indigo-300 from-purple-300'>No messages yet...</p>
       ) : (
         <ul>
           {messages.map((message) => (
