@@ -5,20 +5,19 @@ import { auth } from '@/app/api/auth/[...nextauth]/auth'
 export default async function NavbarSignOut(){
 const session = await auth();
   return (
-    <nav className="border-solid sticky top-0 border-neutral-900 w-full border-b py-4 bg-neutral-900 z-50 bg-inherit">
+    <nav className="sticky top-0 bg-sky-50 w-full py-4 bg-gray-100 z-50 bg-inherit">
       <div className="container mx-auto">
         <div className="w-full flex flex-col lg:flex-row justify-between">
           <div className="flex lg:flex-row">
-            <a
-              href=""
-              className="rounded-full px-3 py-1 text-4xl font-extrabold flex items-center text-gray-100"
+            <img
+              src="/StudyWithMeLogo.png"
+              className="h-14 rounded-full px-3 py-1 text-4xl font-extrabold flex items-center text-gray-100"
             >
-              StudyWithMe
-            </a>
+            </img>
           </div>
           <div className="flex items-center">
           <Link href={session ? "/api/auth/signout" : "/"}>
-          <button type='button' className='py-2.5 px-6 text-sm rounded-full bg-indigo-500 text-white cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-indigo-700'>
+          <button type='button' className='py-2.5 px-6 text-sm rounded-full bg-sky-300 text-white cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-sky-500'>
             Sign out</button>
           </Link>
           

@@ -1,4 +1,4 @@
-import NavbarSignOut from "@/app/components/Navbar/Navbar-signOut";
+import NavbarSignOut from "@/app/components/Navbar/NavbarSign-out";
 import MyPosts from "@/app/components/MyPosts/MyPosts";
 import AllStudentPosts from "@/app/components/AllStudentPosts/AllStudentPosts";
 import Inbox from '@/app/components/Inbox'

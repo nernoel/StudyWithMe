@@ -5,7 +5,7 @@ import { auth } from '@/app/api/auth/[...nextauth]/auth'
 export default async function NavbarSignIn(){
 const session = await auth();
   return (
-    <nav className="border-solid sticky top-0 bg-opacity-50 w-full border-b py-4 bg-gray-100 z-50 bg-inherit">
+    <nav className="sticky top-0 bg-sky-50 w-full py-4 bg-gray-100 z-50 bg-inherit">
       <div className="container mx-auto">
         <div className="w-full flex flex-col lg:flex-row justify-between">
           <div className="flex lg:flex-row">
@@ -16,7 +16,7 @@ const session = await auth();
             </img>
           </div>
           <div className="flex items-center">
-          <Link href={!session ? "/api/auth/signin" : "/pages/dashboard"}>
+          <Link href={!session ? "/auth/login" : "/pages/dashboard"}>
           <button type='button' className='py-2.5 px-6 text-sm rounded-full bg-sky-300 text-white cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-sky-500'>
             Sign in</button>
           </Link>
