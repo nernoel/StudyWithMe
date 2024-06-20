@@ -1,6 +1,6 @@
-import { signIn } from "@/app/api/auth/[...nextauth]/auth"
- 
-export function SignInGoogle() {
+import { auth, signIn } from "@/app/api/auth/[...nextauth]/auth" 
+
+export async function SignInGoogle() {
   return (
     <form
       action={async () => {
@@ -8,6 +8,7 @@ export function SignInGoogle() {
         await signIn("google")
       }}
     >
+      
       <button
         type="submit"
         className="ml-24 hover:text-gray-900 text-white bg-sky-400 hover:bg-sky-200 rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-2"

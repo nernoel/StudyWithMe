@@ -1,9 +1,16 @@
-import { SignInGoogle } from "@/app/Temp/Sign-in-google"
 
 
-export default function Example() {
+import { SignInGoogle } from "@/app/Testing/Sign-in-google"
+import { auth } from '@/app/api/auth/[...nextauth]/auth'
+import { redirect } from 'next/navigation';
+
+
+export default async function SignInPage() {
+  const session = await auth();
     return (
       <>
+      {/* if there is a user session redirect to user dashboard
+        */session ? redirect("/pages/dashboard") : ""}
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <img
@@ -17,6 +24,7 @@ export default function Example() {
           </div>
   
           <div className="place-content-center mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            {/* Sign in with providers */}
           <SignInGoogle />
           </div>
         </div>
