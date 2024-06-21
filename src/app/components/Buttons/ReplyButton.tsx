@@ -39,8 +39,8 @@ const Modal: React.FC<ModalProps> = ({ image, show, handleClose, handleSend, rec
                     &#x2715;
                 </button>
                 <div className="flex flex-col items-center">
-                    <div className="w-16 h-10 mb-4">
-                        <img className="rounded-full" src={image} alt="Avatar" />
+                    <div className="w-9 h-9 mb-4">
+                        <img className="rounded-full" src='/AnonUser.png' alt="Avatar" />
                     </div>
                     <textarea
                         className="focus:ring-green-500 w-full h-32 p-2 border rounded mb-10"

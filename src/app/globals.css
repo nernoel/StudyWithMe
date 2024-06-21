@@ -2,10 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-.hover\:hover-effect:hover .w-full {
-    max-height: 10rem; /* Change this value to adjust the height on hover */
-}
-
-body {
-    
-}

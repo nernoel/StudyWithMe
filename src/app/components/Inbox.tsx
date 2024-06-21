@@ -56,9 +56,9 @@ const Inbox: React.FC<{ userId: string }> = ({ userId }) => {
 
   return (
     <div className="inbox">
-     <h1 className="mb-4 text-3xl font-extrabold text-gray-200 md:text-5xl lg:text-6xl"><span className="text-transparent bg-clip-text bg-gradient-to-r to-indigo-300 from-purple-300">Inbox</span> </h1>
+     <h1 className="mb-4 text-3xl font-extrabold text-gray-200 md:text-5xl lg:text-6xl"><span className="text-transparent bg-clip-text bg-gradient-to-r to-gray-900 from-gray-900">Messages</span> </h1>
       {messages.length === 0 ? (
-        <p className='text-transparent bg-clip-text bg-gradient-to-r to-indigo-300 from-purple-300'>No messages yet...</p>
+        <p className='text-transparent bg-clip-text bg-gradient-to-r to-indigo-300 from-purple-300'>Your inbox is currently empty!</p>
       ) : (
         <ul>
           {messages.map((message) => (

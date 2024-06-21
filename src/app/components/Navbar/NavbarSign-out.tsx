@@ -5,7 +5,7 @@ import { auth } from '@/app/api/auth/[...nextauth]/auth'
 export default async function NavbarSignOut(){
 const session = await auth();
   return (
-    <nav className="sticky top-0 bg-sky-50 w-full py-4 bg-gray-100 z-50 bg-inherit">
+    <nav className="sticky top-0 bg-sky-50 w-full py-4 bg-gray-100 z-50 bg-inherit shadow-md shadow-sky-50">
       <div className="container mx-auto">
         <div className="w-full flex flex-col lg:flex-row justify-between">
           <div className="flex lg:flex-row">
