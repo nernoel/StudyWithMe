@@ -14,12 +14,12 @@ const corsOptions = {
 app.use(express.json()); // parse incoming json requests
 app.use(cors(corsOptions));
 
-// HOME - default endpoint
+
 app.get('/', (req, res) => {
-    res.send('Express server on port 3000!')
+    res.send('StudyWithMe Express server!')
 })
 
-// Fetch all posts
+// Fetch all user posts
 app.get('/posts', async (req, res) => {
     const data = await prisma.post.findMany();
     res.json(data);
