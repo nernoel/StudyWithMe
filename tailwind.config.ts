@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        body: ['Open Sans', 'sans-serif'],
+    },
       
     },
   },

@@ -1,12 +1,15 @@
 import NavbarSignOut from "@/app/components/Navbar/NavbarSign-out";
 import MyPosts from "@/app/components/MyPosts/MyPosts";
 import AllStudentPosts from "@/app/components/AllStudentPosts/AllStudentPosts";
-import Inbox from '@/app/components/Inbox'
+
 import {auth} from '@/app/api/auth/[...nextauth]/auth'
+import Link from "next/link";
+
 
 
 export default async function Dashboard() {
   const session = await auth();
+  
   return (
     <>
     {/* top right gradient */}
@@ -28,12 +31,12 @@ export default async function Dashboard() {
 
       <h1 className="ml-8 mb-4 text-3xl font-extrabold text-gray-200 md:text-5xl lg:text-3xl mt-9 ml-3"><span className="text-transparent bg-clip-text bg-gradient-to-r to-gray-900 from-gray-900">Welcome {session?.user?.name}!</span> </h1>
       
-      <button type="button" className="ml-8 inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-gray-900 bg-sky-300 rounded-lg hover:bg-sky-500">
+      <Link href="\inbox" type="button" className="font-bold ml-8 inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-gray-900 bg-sky-300 rounded-lg hover:bg-sky-500">
       View Messages
       <span className="inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold text-red-50 bg-red-500 rounded-full">
       2
       </span>
-      </button>
+      </Link>
             
       </div>
       <div
