@@ -1,6 +1,6 @@
 import { auth, signIn } from "@/app/api/auth/[...nextauth]/auth" 
 
-export async function SignInGoogle() {
+export async function SignInGoogleButton() {
   return (
     <form
       action={async () => {

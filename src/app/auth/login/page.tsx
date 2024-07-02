@@ -1,4 +1,4 @@
-import { SignInGoogle } from "@/app/Testing/Sign-in-google"
+import { SignInGoogleButton } from "@/app/components/Buttons/Sign-in-googleButton"
 import { auth } from '@/app/api/auth/[...nextauth]/auth'
 import { redirect } from 'next/navigation';
 
@@ -23,7 +23,7 @@ export default async function SignInPage() {
   
           <div className="place-content-center mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             {/* Sign in with providers */}
-          <SignInGoogle />
+          <SignInGoogleButton />
           </div>
         </div>
       </>

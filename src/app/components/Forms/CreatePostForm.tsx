@@ -71,17 +71,17 @@ export default function CreatePostForm() {
             </button>
             
             {isModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-neutral-950 p-6 rounded-lg shadow-lg w-full max-w-md">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-sky bg-opacity-50">
+                    <div className="bg-slate-900 p-6 rounded-lg shadow-lg w-full max-w-md">
                         <div className="flex justify-between items-center pb-4 border-b">
-                            <h3 className="text-lg font-semibold text-gray-200">Create Post</h3>
+                            <h3 className="text-lg font-semibold text-gray-200">Create new post</h3>
                             <button
                                 className="text-gray-500 hover:text-gray-200"
                                 onClick={closeModal}
                             >
                                 <span className="sr-only">Close</span>
                                 <svg
-                                    className="w-6 h-6"
+                                    className="w-6 h-6 bg-red-500 rounded-full"
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"

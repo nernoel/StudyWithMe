@@ -132,27 +132,20 @@ export default async function Post({ id }: MyPost) {
 
     // fetching session
     // fetch post owner session
-    const fetchSession = async () => {
-        const data = await client.post.findUnique({
-            where: {
-                id: id
-            },
-            select: {
-                user: {
-                    select: {
-                        sessions: {
-                            select: {
-                                expires: true,
-                                sessionToken: true
-                            }
-                        }
-                    }
-                }
-            }
-        });
+    const postOwnerID = fetchPostOwnerID();
 
-        return data?.user.sessions;
-    };
+    const fetchUserSession = async (postOwnerID: undefined) => {
+        const data = await client.account.findMany({
+          where: {
+            userId: postOwnerID,
+          },
+          select: {
+            session_state: true,
+          },
+        });
+      
+        return data.length > 0 ? data[0].session_state : null;
+      };
 
     
    
@@ -165,7 +158,7 @@ export default async function Post({ id }: MyPost) {
     const postLocation = await fetchPostLocation();
     const postDate = await fetchPostDate();
     const image = await fetchPostOwnerImage();
-    const postOwnerID = await fetchPostOwnerID();
+    
 
     const convertTo12HourFormat = (time24: String) => {
         const [hours, minutes] = time24.split(':');
@@ -186,7 +179,7 @@ export default async function Post({ id }: MyPost) {
 
         return `${formattedHours}:${minutes} ${period}`;
     };
-    const userSession = await fetchSession();
+    const userSession = await fetchUserSession(postOwnerID);
    
     
     return (
@@ -194,8 +187,8 @@ export default async function Post({ id }: MyPost) {
             <div className="mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow">
             <div className="relative">
                 <img className="mt-1 ml-3 h-12 w-12 rounded-full" src={image != null ? image : "/AnonUser.png" } alt=""></img>
-                {userSession ? <span className="bottom-0 left-12 absolute  w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></span>
-                :  <span className="bottom-0 left-12 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white rounded-full"></span>}
+                {!userSession ? <span className="bottom-0 left-12 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white rounded-full"></span>
+                :  <span className="bottom-0 left-12 absolute  w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></span>}
                
                 </div>
                 <div className="p-4">
@@ -218,7 +211,7 @@ export default async function Post({ id }: MyPost) {
                     <MessageButton 
                     senderId={session?.user?.id!}
                     recipientId={postOwnerID!}
-                    image={image} />
+                    image={image!} />
                 </div>
             </div>
         </div>
