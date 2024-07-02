@@ -1,4 +1,3 @@
-import { PrismaClient } from '@prisma/client';
 import React, { useState } from 'react';
 import ReplyButton from './Buttons/ReplyButton';
 
