@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {};
 
+
 webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     if (!isServer) {
       config.output.filename = 'static/chunks/[name].js';

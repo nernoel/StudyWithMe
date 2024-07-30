@@ -21,7 +21,7 @@ export default function Hero() {
               Never study alone again!
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-            By using StudyWithMe <span className='bg-sky-200 text-gray-900'> find someone to study within a matter of minutes!</span> Simply send a message showing interest and it's as easy as that! Click below to get started!
+            By using StudyWithMe <span className="bg-sky-200 text-gray-900"> find someone to study within a matter of minutes!</span> Simply send a message showing interest and it&apos;s as easy as that! Click below to get started!
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a

@@ -27,12 +27,12 @@ export default async function AllStudentPosts() {
                     <StudentPost
                         id={post.id}
                         key={post.id}
-                        title={""}
-                        description={post.description}
-                        location={post.location}
-                        start_time={""}
-                        end_time={""}
-                        date={""} 
+                        //title={.id}
+                        //description={post.description}
+                        //location={post.location}
+                        //start_time={""}
+                        //end_time={""}
+                        //date={""} 
                        />
                 ))}
             </div>
